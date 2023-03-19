@@ -1,10 +1,4 @@
 # node-challenge
-
-This challenge was part of my Frontend-Development Bootcamp. 
-The challenge was to create a README file using node.js
-This challenge has no deployed app link but below you can see the README my app generated to me. 
-
-
   ![Github license](https://img.shields.io/badge/license-MIT-blue.svg)
 
   ### Description

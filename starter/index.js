@@ -4,12 +4,11 @@ const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
 
 // array of questions for user
-const questions = () =>
-inquirer.prompt([
+const questions = [
   {
     type: 'input',
     name: 'title',
-    message: 'The title of your Readme:',
+    message: 'The name of your project:',
   },
   {
     type: 'input',
@@ -28,53 +27,43 @@ inquirer.prompt([
   },
   {
     type: 'input',
-    name: '',
-    message: '',
+    name: 'github',
+    message: 'Your GitHub username:',
   },
   {
     type: 'input',
-    name: '',
-    message: '',
+    name: 'email',
+    message: 'Your email address:',
   },
+  
+  {
+    type: 'list',
+    name: 'license',
+    message: 'What kind of license you would like to chose?',
+    choices: ["MIT", "APACHE 2.0", "GPL", "None"],
+  },  
   {
     type: 'input',
-    name: 'Would you like to add a Table of contents?',
-    message: '',
-  },
-]);
-//When a user is prompted for information about the application repository, 
-//a high-quality, professional README.md is generated with:
-//The title of my project
-
-//Sections entitled:
-
-//Description
-
-//Table of Contents
-
-//Installation
-
-//Usage
-
-//License
-
-//Contributing
-
-//Tests
-
-//Questions
-
+    name: 'test',
+    message: 'What command will run the test?',
+    default: 'npm test'
+  }
+];
 
 // function to write README file
 function writeToFile(fileName, data) {
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data)
 //    const generateHTML = (answers) =>
-        var md = require('markdown-it')();
-        var result = md.render('# markdown-it rulezz!');
+        //var md = require('markdown-it')();
+        //var result = md.render('# markdown-it rulezz!');
 }
 
 // function to initialize program
 function init() {
-
+  inquirer.prompt(questions).then((response) => {
+    console.log("Generating a README...⌛")
+    writeToFile('README.md', generateMarkdown({...response}))
+  })
 }
 
 // function call to initialize program
